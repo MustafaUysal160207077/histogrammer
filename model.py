@@ -15,6 +15,12 @@ class Camera:
     def find_sample(self):
         hsv = cv2.cvtColor(self.frame, cv2.COLOR_RGB2HSV)
 
+        for x in range(0, self.frame.shape[0]):
+            for y in range(0, self.frame.shape[1]):
+                if self.frame[x, y, 0] > 30 or self.frame[x, y, 1] > 30 or self.frame[x, y, 2] > 30:
+                    self.frame[x, y, 0] = 0
+                    self.frame[x, y, 1] = 0
+                    self.frame[x, y, 2] = 0
 
         lower_limit = np.array([0, 0, 90])
         upper_limit = np.array([255, 255, 255])
